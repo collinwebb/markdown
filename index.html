@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
+  </head>
+  <script>
+    var app = angular.module("blogPost", []);
+    app.controller("postCtrl", init);
+
+    function init ($scope, $http, $sce){
+      $scope.getPreview = function (){
+        var encode = encodeURIComponent($scope.markdown);
+        $http.get("/markdown/" + encode)
+          .success(function(data){
+          $scope.preview = $sce.trustAsHtml(data);
+        });
+      };
+    }
+  </script>
+  <body ng-app="blogPost" ng-controller="postCtrl">
+    <div class="container">
+      <h3 class="text-center">Ghost-like Markdown Previewer</h3>
+      <br>
+      <hr>
+      <div class="row">
+        <textarea ng-model="markdown" ng-keyup="getPreview()" class="col-md-6" rows="30">
+        </textarea>
+        <div class="col-md-6" ng-bind-html="preview">
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>

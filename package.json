@@ -1,0 +1,14 @@
+{
+  "name": "not-ghost",
+  "version": "1.0.0",
+  "description": "this is my attempt to make a blogging platform like ghost using node and angular.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "marked": "^0.3.3"
+  }
+}
